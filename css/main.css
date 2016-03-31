@@ -44,6 +44,9 @@ textarea {
     resize: vertical;
 }
 
+body {
+    font-family: 'Press Start 2P', cursive;
+}
 .browserupgrade {
     margin: 0.2em 0;
     background: #ccc;
@@ -51,14 +54,25 @@ textarea {
     padding: 0.2em 0;
 }
 
-
 .wrapper {
+    width: 100%;
+    text-align: center;
+    padding-top:100px;
+}
+.wrapper .scoreboard {
+    font-size: 40px;
+}
+.field {
     position: relative;
     width:1388px;
-    height:500px;
+    height:530px;
     margin:0 auto;
-    margin-top:200px;
-    background-image: url("../img/tile_2.png")
+    margin-top:80px;
+    margin-bottom:30px;
+
+    border:5px solid #000;
+    background-image: url("../img/grass_tile.png");
+    background-size: contain;
 }
 .ball {
     width:50px;
