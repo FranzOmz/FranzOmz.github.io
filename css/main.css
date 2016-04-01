@@ -56,6 +56,7 @@ body {
 
 .wrapper {
     width: 100%;
+    min-width:1024px;
     text-align: center;
     padding-top:100px;
 }
@@ -64,15 +65,18 @@ body {
 }
 .field {
     position: relative;
-    width:1388px;
+    width:100%;
     height:530px;
     margin:0 auto;
     margin-top:80px;
     margin-bottom:30px;
 
     border:5px solid #000;
-    background-image: url("../img/grass_tile.png");
-    background-size: contain;
+    background-color:#719e2c;
+    background-image: url("../img/gate_left.png"), url("../img/gate_right.png"), url("../img/grass_tile.jpg");
+    background-repeat: no-repeat, no-repeat, repeat;
+    background-position: left, right;
+    background-size:;
 }
 .ball {
     width:50px;

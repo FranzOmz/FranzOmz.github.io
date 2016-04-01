@@ -1,41 +1,77 @@
 'use strict';
 
-var leftKeeper = document.getElementById('goalkeeper_left'),
-	rightKeeper = document.getElementById('goalkeeper_right');
 
-function goalKeeperMover(event) {
-	var value = 20,
-		leftStartValue = leftKeeper.offsetTop,
-		rightStartValue = rightKeeper.offsetTop;
-		console.log(event)
-	if (event.which === 119 || event.which === 1094) {
-		if (leftKeeper.offsetTop < 20) {
-			return false;
-		}
+/* ------------------ИГРОК------------------ */
 
-		leftKeeper.style.top = leftStartValue - value + 'px';
-	}
-
-	if (event.which === 115 || event.which === 1099) {
-		if (leftKeeper.offsetTop > 460) {
-			return false;
-		}
-		leftKeeper.style.top = leftStartValue + value + 'px';
-	}
-
-	if (event.which === 105 || event.which === 1096) {
-		if (rightKeeper.offsetTop < 20) {
-			return false;
-		}
-
-		rightKeeper.style.top = rightStartValue - value + 'px';
-	}
-
-	if (event.which === 107 || event.which === 1083) {
-		if (rightKeeper.offsetTop > 460) {
-			return false;
-		}
-		rightKeeper.style.top = rightStartValue + value + 'px';
-	}
+function Keeper(identity) {
+	this.speed = 20;
+	this.identity = document.getElementById(identity);
 }
-document.documentElement.addEventListener("keypress", goalKeeperMover);
+
+let player1 = new Keeper('goalkeeper_left'),
+	player2 = new Keeper('goalkeeper_right');
+
+
+
+// /* ------------------КНОПКИ------------------ */
+
+let keys = {
+	_pressed: {},
+
+	firstPlayer: {
+      UP: 38,
+      DOWN: 40
+	},
+
+	secondPlayer: {
+		UP: 87,
+		DOWN: 83
+	},
+
+      isDown: function(keyCode) {
+        return this._pressed[keyCode];
+      },
+
+      onKeydown: function(event) {
+        if (event.keyCode === keys.firstPlayer.UP || event.keyCode === keys.firstPlayer.DOWN) {
+    		keys._pressed[event.keyCode] = true;
+    		event.preventDefault();
+    	}
+    	if (event.keyCode === keys.secondPlayer.UP || event.keyCode === keys.secondPlayer.DOWN) {
+    		keys._pressed[event.keyCode] = true;
+    	}
+
+    	if (keys.isDown(this.firstPlayer.UP)) player1.moveUp(player1.identity.offsetTop);
+    	if (keys.isDown(this.secondPlayer.UP)) player2.moveUp(player2.identity.offsetTop);
+    	if (keys.isDown(this.firstPlayer.DOWN)) player1.moveDown(player1.identity.offsetTop);
+    	if (keys.isDown(this.secondPlayer.DOWN)) player2.moveDown(player2.identity.offsetTop);
+      },
+
+      onKeyup: function(event) {
+      	if (event.keyCode === keys.firstPlayer.UP || event.keyCode === keys.firstPlayer.DOWN) {
+    		delete this._pressed[event.keyCode];
+    	}
+    	if (event.keyCode === keys.secondPlayer.UP || event.keyCode === keys.secondPlayer.DOWN) {
+    		delete this._pressed[event.keyCode];
+    	}
+      }
+}
+
+/* ------------------ДВИЖЕНИЯ------------------ */
+
+    Keeper.prototype.moveUp = function(position) {
+    	if (this.identity.offsetTop < 20) {
+      		return false
+      	}
+      	this.identity.style.top = position - this.speed + 'px';
+    };
+
+    Keeper.prototype.moveDown = function(position) {
+    	if (this.identity.offsetTop > 460) {
+      		return false
+      	}
+      this.identity.style.top = position + this.speed + 'px';
+    };
+
+    document.addEventListener('keyup', function(event) { keys.onKeyup(event); });
+    document.addEventListener('keydown', function(event) { keys.onKeydown(event); });
