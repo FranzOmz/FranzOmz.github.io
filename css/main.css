@@ -70,13 +70,11 @@ body {
     margin:0 auto;
     margin-top:80px;
     margin-bottom:30px;
-
     border:5px solid #000;
     background-color:#719e2c;
     background-image: url("../img/gate_left.png"), url("../img/gate_right.png"), url("../img/grass_tile.jpg");
     background-repeat: no-repeat, no-repeat, repeat;
     background-position: left, right;
-    background-size:;
 }
 .ball {
     width:50px;

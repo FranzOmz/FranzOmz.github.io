@@ -19,13 +19,13 @@ let keys = {
 	_pressed: {},
 
 	firstPlayer: {
-      UP: 38,
-      DOWN: 40
+      UP: 87,
+      DOWN: 83
 	},
 
 	secondPlayer: {
-		UP: 87,
-		DOWN: 83
+		UP: 38,
+		DOWN: 40
 	},
 
       isDown: function(keyCode) {
